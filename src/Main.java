@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 /*
 Create a method called getDurationString with two parameters, 1st minutes, 2nd seconds.
 Validate that minutes >= 0
@@ -21,6 +23,29 @@ Output for 61 minutes should be 01h 01m 00s, note the 2 digits. use if-else
  */
 public class Main {
     public static void main(String[] args) {
+        System.out.println(getDurationString(61,32));
+        System.out.println(getDurationString(3692));
+    }
 
+    public static String getDurationString (int minutes, int seconds){
+        int hours = 0;
+        if (minutes < 0 || (seconds < 0 || seconds > 59)){
+            return "Invalid Value";
+        }
+        else if (minutes / 60 > 0) {
+            hours = minutes / 60;
+            minutes = minutes % 60;
+        }
+        DecimalFormat twoDigits = new DecimalFormat("00");
+        return twoDigits.format(hours) + "h " + twoDigits.format(minutes) + "m " + twoDigits.format(seconds) + "s";
+    }
+
+    public static String getDurationString (int seconds){
+        if (seconds < 0){
+            return "Invalid String";
+        }
+        else {
+            return getDurationString((seconds / 60), (seconds % 60));
+        }
     }
 }
